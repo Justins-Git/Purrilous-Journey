@@ -7,10 +7,10 @@ With charming visuals, a heartwarming story, and playful mechanics, Purrilous Jo
 
 Key Features:
 
-    Unique Cat Abilities: Climb walls, balance on narrow beams, sprint through danger, and interact with the environment in playful, cat-like ways.
-    Puzzle-Solving Adventure: Navigate dynamic obstacles, manipulate light and shadow, and interact with friendly and hostile NPCs to progress.
-    Themed Environments: Explore vibrant cityscapes, peaceful parks, eerie sewers, and more, each with its own challenges and atmosphere.
-    Collectibles and Secrets: Discover hidden items and side puzzles to enrich the story and deepen your connection to the world.
-    Heartwarming Story: Experience a journey of resilience and hope as the cat faces challenges to reunite with the comfort of home.
+- Unique Cat Abilities: Climb walls, balance on narrow beams, sprint through danger, and interact with the environment in playful, cat-like ways.
+- Puzzle-Solving Adventure: Navigate dynamic obstacles, manipulate light and shadow, and interact with friendly and hostile NPCs to progress.
+- Themed Environments: Explore vibrant cityscapes, peaceful parks, eerie sewers, and more, each with its own challenges and atmosphere.
+- Collectibles and Secrets: Discover hidden items and side puzzles to enrich the story and deepen your connection to the world.
+- Heartwarming Story: Experience a journey of resilience and hope as the cat faces challenges to reunite with the comfort of home.
 
 Purrilous Journey is an unforgettable tale of courage, curiosity, and the unwavering determination of one small cat.
