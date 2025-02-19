@@ -2,29 +2,30 @@ using UnityEngine;
 
 public class UnitHealth : MonoBehaviour
 {
-    [SerializeField]
-    private int maxHealth = 10;
-    [SerializeField]
-    private int currentHealth;
+    public int MaxHealth = 10; // Maximum health of the unit
+    public int CurrentHealth { get; private set; } // Public getter for health bar
 
-    public int CurrentHealth => currentHealth; // Public read-only property
-
-    private void Start()
+    void Start()
     {
-        currentHealth = maxHealth;
+        CurrentHealth = MaxHealth; // Set starting health
     }
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(int amount)
     {
-        currentHealth -= damageAmount;
-        if (currentHealth <= 0)
+        CurrentHealth -= amount;
+        Debug.Log($"{gameObject.name} took {amount} damage! Remaining HP: {CurrentHealth}");
+
+        // Ensure health doesn't drop below zero
+        if (CurrentHealth <= 0)
         {
+            CurrentHealth = 0;
             Die();
         }
     }
 
-    private void Die()
+    void Die()
     {
-        Destroy(gameObject);
+        Debug.Log($"{gameObject.name} has died!");
+        Destroy(gameObject); // Destroy the unit when health reaches zero
     }
 }

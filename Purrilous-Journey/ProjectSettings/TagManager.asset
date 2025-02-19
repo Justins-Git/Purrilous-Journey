@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - EnemyBase
   - EnemyUnit
+  - PlayerUnit
+  - Base
   layers:
   - Default
   - TransparentFX
@@ -13,8 +14,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 
