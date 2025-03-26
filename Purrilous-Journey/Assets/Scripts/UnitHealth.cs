@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class UnitHealth : MonoBehaviour
 {
-    public int MaxHealth = 10; // Maximum health of the unit
-    public int CurrentHealth { get; private set; } // Public getter for health bar
+    public int MaxHealth = 10;
+    public int CurrentHealth { get; private set; }
+
+    private UnitController unitController;
 
     void Start()
     {
-        CurrentHealth = MaxHealth; // Set starting health
+        CurrentHealth = MaxHealth;
+        unitController = GetComponent<UnitController>(); 
     }
 
     public void TakeDamage(int amount)
@@ -15,7 +18,6 @@ public class UnitHealth : MonoBehaviour
         CurrentHealth -= amount;
         Debug.Log($"{gameObject.name} took {amount} damage! Remaining HP: {CurrentHealth}");
 
-        // Ensure health doesn't drop below zero
         if (CurrentHealth <= 0)
         {
             CurrentHealth = 0;
@@ -26,6 +28,13 @@ public class UnitHealth : MonoBehaviour
     void Die()
     {
         Debug.Log($"{gameObject.name} has died!");
-        Destroy(gameObject); // Destroy the unit when health reaches zero
+
+        // Only reward gold if this was an enemy unit
+        if (unitController != null && !unitController.isPlayerUnit)
+        {
+            GoldManager.Instance?.AddGold(10);
+        }
+
+        Destroy(gameObject);
     }
 }

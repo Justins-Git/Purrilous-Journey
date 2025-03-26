@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2000646911891961471}
   - component: {fileID: 6698118662567293130}
   m_Layer: 0
-  m_Name: CatUnit
+  m_Name: ArcherCat
   m_TagString: EnemyUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.8962264, g: 0.13105197, b: 0.6972955, a: 1}
+  m_Color: {r: 0.12941174, g: 0.25779328, b: 0.8980392, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -271,10 +271,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   detectionRadius: 5
-  attackRange: 1.8
-  baseAttackRange: 2.5
+  attackRange: 3.5
+  baseAttackRange: 3.5
   queueDistance: 1.55
-  maxQueueCheckDistance: 3.5
+  maxQueueCheckDistance: 1.6
   attackDamage: 2
   attackCooldown: 1.5
   attackStartDelay: 0.25
