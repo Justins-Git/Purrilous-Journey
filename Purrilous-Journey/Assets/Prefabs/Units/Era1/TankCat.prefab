@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 2000646911891961471}
   - component: {fileID: 6698118662567293130}
   m_Layer: 0
-  m_Name: ArcherCat
+  m_Name: TankCat
   m_TagString: EnemyUnit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.12941174, g: 0.25779328, b: 0.8980392, a: 1}
+  m_Color: {r: 0.12941174, g: 0.8980392, b: 0.24910992, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -183,8 +183,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd501f98b555134996e11e0bc3f625f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 10
-  goldReward: 10
+  MaxHealth: 24
+  goldReward: 15
+  minXP: 15
+  maxXP: 20
   floatingGoldPrefab: {fileID: 3216971601426397685, guid: 62e0d36b05ef8c443ba62c5f06523a30, type: 3}
 --- !u!61 &5030182073579273093
 BoxCollider2D:
@@ -273,10 +275,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   detectionRadius: 5
-  attackRange: 3.5
-  baseAttackRange: 3.5
+  attackRange: 1.5
+  baseAttackRange: 2.5
   queueDistance: 1.55
-  maxQueueCheckDistance: 1.6
+  maxQueueCheckDistance: 3.5
   attackDamage: 2
   attackCooldown: 1.5
   attackStartDelay: 0.25

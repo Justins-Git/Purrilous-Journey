@@ -5,7 +5,15 @@ using System.Collections;
 
 public class PlayerUnitSpawner : MonoBehaviour
 {
-    public GameObject[] unitPrefabs; // [0] = Melee, [1] = Archer, [2] = Tank
+    public static PlayerUnitSpawner Instance;
+    public GameObject[] era1Prefabs;
+    public GameObject[] era2Prefabs;
+    public GameObject[] era3Prefabs;
+    public GameObject[] era4Prefabs;
+    public GameObject[] era5Prefabs;
+
+    private GameObject[] currentPrefabs; // [0] = Melee, [1] = Archer, [2] = Tank
+
     public int[] unitCosts = new int[] { 25, 40, 60 }; // Costs: 0 = melee, 1 = archer, 2 = tank
     public Transform enemyBaseRef;
     public Transform spawnPoint;
@@ -17,8 +25,15 @@ public class PlayerUnitSpawner : MonoBehaviour
     public Button archerButton;
     public Button tankButton;
 
+    void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
+        currentPrefabs = era1Prefabs;
+
         meleeButton.onClick.RemoveAllListeners();
         archerButton.onClick.RemoveAllListeners();
         tankButton.onClick.RemoveAllListeners();
@@ -53,14 +68,14 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     void SpawnUnit(int unitIndex)
     {
-        if (unitIndex < 0 || unitIndex >= unitPrefabs.Length)
+        if (unitIndex < 0 || unitIndex >= currentPrefabs.Length)
         {
             Debug.LogWarning("Invalid unit index!");
             return;
         }
 
         Vector3 spawnPos = spawnPoint != null ? spawnPoint.position : transform.position;
-        GameObject newUnit = Instantiate(unitPrefabs[unitIndex], spawnPos, Quaternion.identity);
+        GameObject newUnit = Instantiate(currentPrefabs[unitIndex], spawnPos, Quaternion.identity);
         newUnit.layer = 6;
 
         UnitController uc = newUnit.GetComponent<UnitController>();
@@ -72,6 +87,16 @@ public class PlayerUnitSpawner : MonoBehaviour
             uc.isPlayerUnit = true;
         }
 
-        Debug.Log($"Spawned unit: {unitPrefabs[unitIndex].name}");
+        Debug.Log($"Spawned unit: {currentPrefabs[unitIndex].name}");
+    }
+
+    public void OnEraEvolve(int eraLevel)
+    {
+        if (eraLevel == 1)
+            currentPrefabs = era2Prefabs;
+        else if (eraLevel == 2)
+            currentPrefabs = era3Prefabs;
+
+        Debug.Log("Spawner now using new era unit prefabs.");
     }
 }

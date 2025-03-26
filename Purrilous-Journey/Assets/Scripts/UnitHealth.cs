@@ -5,6 +5,9 @@ public class UnitHealth : MonoBehaviour
     public int MaxHealth = 10;
     public int CurrentHealth { get; private set; }
     public int goldReward = 15; // This number is different per unit type in inspector
+    public int minXP = 10; // This number is different per unit type in inspector
+    public int maxXP = 20; // This number is different per unit type in inspector
+
     public GameObject floatingGoldPrefab; // 🧾 Assign this in the prefab or runtime
 
 
@@ -36,6 +39,9 @@ public class UnitHealth : MonoBehaviour
         if (unitController != null && !unitController.isPlayerUnit)
         {
             GoldManager.Instance?.AddGold(goldReward);
+            int xp = Random.Range(minXP, maxXP + 1);
+            EraManager.Instance?.AddXP(xp);
+
 
             if (floatingGoldPrefab != null)
             {

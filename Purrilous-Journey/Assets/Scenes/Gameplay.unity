@@ -736,7 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentGold: 0
-  startingGold: 50
+  startingGold: 5
   passiveGoldInterval: 1
   passiveGoldAmount: 1
   goldText: {fileID: 281887131}
@@ -1119,6 +1119,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
+  goldReward: 15
+  floatingGoldPrefab: {fileID: 0}
 --- !u!114 &713038463 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 9162519788536208867, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
@@ -2039,6 +2041,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4444670312786654450, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 5053648009662057284, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -2362,6 +2368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
+  goldReward: 15
+  floatingGoldPrefab: {fileID: 0}
 --- !u!61 &1707889459
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2571,15 +2579,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d848eaafcdc50409d11fd760ab71e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  easyUnits:
-  - {fileID: 3407256142306575783, guid: 003a1f7e1fdba4c4aa91017e982927e0, type: 3}
+  meleeCat: {fileID: 3407256142306575783, guid: 003a1f7e1fdba4c4aa91017e982927e0, type: 3}
+  archerCat: {fileID: 3407256142306575783, guid: 3af8c79305df74b42a00e71e2b0b9359, type: 3}
+  tankCat: {fileID: 3407256142306575783, guid: e19291368749b514ca06ee610016b550, type: 3}
   spawnPoint: {fileID: 1863957499}
   playerBaseRef: {fileID: 705763976}
   initialSpawnDelay: 2
-  initialSpawnInterval: 10
-  minSpawnInterval: 5
-  difficultyRampTime: 60
-  spawnIntervalDecreaseRate: 0.2
+  initialSpawnInterval: 25
+  minSpawnInterval: 10
+  difficultyRampTime: 180
+  spawnIntervalDecreaseRate: 1.5
 --- !u!4 &1863957499
 Transform:
   m_ObjectHideFlags: 0
