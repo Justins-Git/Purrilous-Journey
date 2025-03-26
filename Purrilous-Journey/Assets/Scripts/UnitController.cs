@@ -3,7 +3,7 @@ using System.Collections;
 
 public class UnitController : MonoBehaviour
 {
-    public float moveSpeed = 2f;
+    public float moveSpeed = 1f;
     public float detectionRadius = 5f;
     public float attackRange = 1.8f; // ✅ Slightly increased to ensure base detection
     public float baseAttackRange = 2.5f; // ✅ Larger range for attacking bases

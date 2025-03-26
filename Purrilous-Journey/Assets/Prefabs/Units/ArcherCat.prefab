@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 10
+  goldReward: 10
+  floatingGoldPrefab: {fileID: 3216971601426397685, guid: 62e0d36b05ef8c443ba62c5f06523a30, type: 3}
 --- !u!61 &5030182073579273093
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -269,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d8873051f1ede94f833941f7935f691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
+  moveSpeed: 1
   detectionRadius: 5
   attackRange: 3.5
   baseAttackRange: 3.5

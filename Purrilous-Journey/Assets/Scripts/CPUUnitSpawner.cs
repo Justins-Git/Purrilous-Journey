@@ -3,21 +3,24 @@ using UnityEngine;
 public class CPUUnitSpawner : MonoBehaviour
 {
     [Header("Unit Prefabs")]
-    public GameObject[] easyUnits;
+    public GameObject meleeCat;
+    public GameObject archerCat;
+    public GameObject tankCat;
 
     [Header("Spawn Settings")]
     public Transform spawnPoint;
     public Transform playerBaseRef;
-    public float initialSpawnDelay = 2f;    
-    public float initialSpawnInterval = 35f; 
-    public float minSpawnInterval = 20f;   
-    public float difficultyRampTime = 180f;  
-    public float spawnIntervalDecreaseRate = 0.2f; 
+
+    public float initialSpawnDelay = 2f;
+    public float initialSpawnInterval = 35f;
+    public float minSpawnInterval = 15f;
+    public float difficultyRampTime = 180f;
+    public float spawnIntervalDecreaseRate = 1.5f;
 
     private float currentSpawnInterval;
     private float spawnTimer;
     private float difficultyTimer;
-    private int difficultyLevel; 
+    private int difficultyLevel;
 
     private void Start()
     {
@@ -34,7 +37,7 @@ public class CPUUnitSpawner : MonoBehaviour
 
         if (spawnTimer >= currentSpawnInterval)
         {
-            SpawnUnit();
+            SpawnUnits();
             spawnTimer = 0f;
         }
 
@@ -45,15 +48,30 @@ public class CPUUnitSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnUnit()
+    private void SpawnUnits()
     {
-        GameObject[] unitArray = easyUnits;
-        int index = Random.Range(0, unitArray.Length);
-        Vector3 spawnPos = spawnPoint ? spawnPoint.position : transform.position;
-        
-        GameObject newUnit = Instantiate(unitArray[index], spawnPos, Quaternion.identity);
+        int unitsToSpawn = 1;
 
-        // ✅ Correctly sets layer using integer index
+        // Random chance to spawn 2 units on higher difficulties
+        if (difficultyLevel >= 3 && Random.value < 0.25f)
+        {
+            unitsToSpawn = 2;
+        }
+
+        for (int i = 0; i < unitsToSpawn; i++)
+        {
+            SpawnOneUnit();
+        }
+    }
+
+    private void SpawnOneUnit()
+    {
+        GameObject unitPrefab = ChooseUnitByDifficulty();
+        if (unitPrefab == null) return;
+
+        Vector3 spawnPos = spawnPoint ? spawnPoint.position : transform.position;
+        GameObject newUnit = Instantiate(unitPrefab, spawnPos, Quaternion.identity);
+
         newUnit.layer = 7;
 
         UnitController unitController = newUnit.GetComponent<UnitController>();
@@ -64,6 +82,23 @@ public class CPUUnitSpawner : MonoBehaviour
             unitController.allyLayer = (1 << 7);
             unitController.isPlayerUnit = false;
         }
+    }
+
+    private GameObject ChooseUnitByDifficulty()
+    {
+        // Melee only (Lv 0–1)
+        if (difficultyLevel <= 1)
+            return meleeCat;
+
+        // Melee + Archers (Lv 2–3)
+        if (difficultyLevel == 2 || difficultyLevel == 3)
+            return Random.value < 0.6f ? meleeCat : archerCat;
+
+        // All three (Lv 4+)
+        float r = Random.value;
+        if (r < 0.5f) return meleeCat;
+        else if (r < 0.8f) return archerCat;
+        else return tankCat;
     }
 
     private void RampDifficulty()

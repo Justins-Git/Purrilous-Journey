@@ -4,6 +4,9 @@ public class UnitHealth : MonoBehaviour
 {
     public int MaxHealth = 10;
     public int CurrentHealth { get; private set; }
+    public int goldReward = 15; // This number is different per unit type in inspector
+    public GameObject floatingGoldPrefab; // 🧾 Assign this in the prefab or runtime
+
 
     private UnitController unitController;
 
@@ -32,8 +35,19 @@ public class UnitHealth : MonoBehaviour
         // Only reward gold if this was an enemy unit
         if (unitController != null && !unitController.isPlayerUnit)
         {
-            GoldManager.Instance?.AddGold(10);
+            GoldManager.Instance?.AddGold(goldReward);
+
+            if (floatingGoldPrefab != null)
+            {
+                GameObject text = Instantiate(floatingGoldPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity);
+                FloatingGold floating = text.GetComponent<FloatingGold>();
+                if (floating != null)
+                {
+                    floating.SetText($"+{goldReward}");
+                }
+            }
         }
+
 
         Destroy(gameObject);
     }
