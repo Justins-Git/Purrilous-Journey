@@ -37,13 +37,12 @@ In **Purrilous Journey**, you command an evolving feline civilization, sending o
 
 ## Roadmap
 
-- [ ] Core Gameplay Foundation.
-- [ ] Add Opponent(Computer).
-- [ ] Add Troop Variations and create their respective assets.
+- [x] Core Gameplay Foundation.
+- [x] Add Opponent(Computer).
+- [x] Add Troop Variations(Melee, Archer, Tank)
 - [ ] Add Different Civilizations with different designs for the base for each civilization.
-- [ ] Create various levels/difficulties for the Opponent(Computer).
 - [ ] Add sound effects and a simple background music loop.
-- [ ] TBD
+- [ ] Create unique visual assets for all troops and bases
 
 ---
 
