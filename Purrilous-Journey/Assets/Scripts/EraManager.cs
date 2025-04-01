@@ -59,6 +59,7 @@ public class EraManager : MonoBehaviour
     {
         currentEra++;
         Debug.Log($"🌟 Evolved to Era {currentEra + 1}!");
+        Debug.Log($"PlayerBaseStats.Instance is {(PlayerBaseStats.Instance == null ? "null" : "set")}");
         PlayerBaseStats.Instance?.OnEraEvolve(currentEra);
         PlayerUnitSpawner.Instance?.OnEraEvolve(currentEra);
         UpdateUI();

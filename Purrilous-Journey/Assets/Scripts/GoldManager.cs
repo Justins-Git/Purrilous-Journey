@@ -5,12 +5,12 @@ public class GoldManager : MonoBehaviour
 {
     public static GoldManager Instance;
 
+    [SerializeField] private PlayerBaseStats playerBaseStats; // 🟢 Assigned in Inspector
     public int currentGold = 0;
     public int startingGold = 50;
-    public float passiveGoldInterval = 2f;
-    public int passiveGoldAmount = 5;
 
-    public TMP_Text goldText; // Assign in Inspector
+    public float passiveGoldInterval = 2f;
+    public TMP_Text goldText; // 🟢 Assign in Inspector
 
     void Awake()
     {
@@ -27,8 +27,17 @@ public class GoldManager : MonoBehaviour
 
     void AddPassiveGold()
     {
-        currentGold += passiveGoldAmount;
-        UpdateGoldUI();
+        if (playerBaseStats != null)
+        {
+            Transform baseTransform = playerBaseStats.GetCurrentBaseTransform();
+            if (baseTransform != null)
+            {
+                BaseStats stats = baseTransform.GetComponent<BaseStats>();
+                int goldToAdd = stats != null ? stats.goldPerTick : 5;
+                AddGold(goldToAdd);
+                Debug.Log($"🪙 Added {goldToAdd} gold from base.");
+            }
+        }
     }
 
     public void AddGold(int amount)
@@ -46,7 +55,7 @@ public class GoldManager : MonoBehaviour
             return true;
         }
 
-        Debug.Log("Not enough gold!");
+        Debug.Log("❌ Not enough gold!");
         return false;
     }
 

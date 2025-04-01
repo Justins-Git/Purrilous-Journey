@@ -36,12 +36,7 @@ public class UnitController : MonoBehaviour
 
         if (currentTarget == null)
         {
-            Debug.LogWarning($"{gameObject.name} has no target. Moving to base.");
             currentTarget = targetBase;
-        }
-        else
-        {
-            Debug.Log($"{gameObject.name} is targeting {currentTarget.name}");
         }
 
         // ✅ Stop moving if an enemy or base is in attack range
@@ -67,13 +62,11 @@ public class UnitController : MonoBehaviour
             {
                 isMoving = true;
                 isWaitingInQueue = false;
-                Debug.Log($"{gameObject.name} is MOVING CLOSER to {frontAlly.name} (current gap: {currentDistanceToAlly}).");
             }
             else
             {
                 isMoving = false;
                 isWaitingInQueue = true;
-                Debug.Log($"{gameObject.name} is STOPPING behind {frontAlly.name} at {stoppingPosition}.");
             }
         }
         else
@@ -107,11 +100,6 @@ public class UnitController : MonoBehaviour
                 closestDistance = distanceToAlly;
             }
         }
-
-        if (frontAlly != null)
-        {
-            Debug.Log($"{gameObject.name} detected {frontAlly.name} in front at distance {closestDistance}.");
-        }
     }
 
     Transform GetClosestEnemy(Collider2D[] enemies)
@@ -138,7 +126,6 @@ public class UnitController : MonoBehaviour
             if (allyController != null && allyController.currentTarget != targetBase)
             {
                 currentTarget = allyController.currentTarget;
-                Debug.Log($"{gameObject.name} is now targeting {currentTarget.name} because {frontAlly.name} is fighting it.");
                 return;
             }
         }
@@ -150,7 +137,6 @@ public class UnitController : MonoBehaviour
         }
         else
         {
-            Debug.Log($"{gameObject.name} is setting target to BASE.");
             currentTarget = targetBase;
         }
     }
@@ -164,7 +150,6 @@ public class UnitController : MonoBehaviour
             {
                 Vector2 direction = (currentTarget.position - transform.position).normalized;
                 transform.Translate(direction * moveSpeed * Time.deltaTime);
-                Debug.Log($"{gameObject.name} is moving towards {currentTarget.name}");
             }
         }
     }
@@ -181,7 +166,6 @@ public class UnitController : MonoBehaviour
             {
                 if (currentTarget.CompareTag("Base") || currentTarget == targetBase)
                 {
-                    Debug.Log($"{gameObject.name} is attacking the enemy BASE!");
                     UnitHealth baseHealth = currentTarget.GetComponent<UnitHealth>();
                     if (baseHealth != null)
                     {

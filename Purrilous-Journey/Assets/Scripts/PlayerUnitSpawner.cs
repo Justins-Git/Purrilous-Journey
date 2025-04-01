@@ -96,7 +96,16 @@ public class PlayerUnitSpawner : MonoBehaviour
             currentPrefabs = era2Prefabs;
         else if (eraLevel == 2)
             currentPrefabs = era3Prefabs;
+        else if (eraLevel == 3)
+            currentPrefabs = era4Prefabs;
+        else if (eraLevel == 4)
+            currentPrefabs = era5Prefabs;
 
         Debug.Log("Spawner now using new era unit prefabs.");
+    }
+
+    public void SetEnemyBase(Transform newBase)
+    {
+        enemyBaseRef = newBase;
     }
 }
