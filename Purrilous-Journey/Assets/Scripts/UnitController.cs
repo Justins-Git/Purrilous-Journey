@@ -5,17 +5,22 @@ public class UnitController : MonoBehaviour
 {
     public float moveSpeed = 1f;
     public float detectionRadius = 5f;
-    public float attackRange = 1.8f; // ✅ Slightly increased to ensure base detection
-    public float baseAttackRange = 2.5f; // ✅ Larger range for attacking bases
-    public float queueDistance = 1.0f; // ✅ Reduced for tighter queue spacing
+    public float attackRange = 1.8f;
+    public float baseAttackRange = 2.5f;
+    public float queueDistance = 1.0f;
     public float maxQueueCheckDistance = 3.5f;
     public int attackDamage = 2;
     public float attackCooldown = 1.5f;
     public float attackStartDelay = 0.25f;
+
     public LayerMask enemyLayer;
     public LayerMask allyLayer;
     public Transform targetBase;
     public bool isPlayerUnit;
+
+    [Header("Animator Controllers")]
+    public RuntimeAnimatorController playerAnimator;
+    public RuntimeAnimatorController enemyAnimator;
 
     private Transform currentTarget;
     private Transform frontAlly;
@@ -24,9 +29,18 @@ public class UnitController : MonoBehaviour
     private bool isWaitingInQueue = false;
     private float lastAttackTime;
 
+    private Animator animator;
+
     void Start()
     {
         AcquireTarget();
+        animator = GetComponent<Animator>();
+
+        if (animator != null)
+        {
+            // Assign the correct Animator Controller at runtime
+            animator.runtimeAnimatorController = isPlayerUnit ? playerAnimator : enemyAnimator;
+        }
     }
 
     void Update()
@@ -39,8 +53,8 @@ public class UnitController : MonoBehaviour
             currentTarget = targetBase;
         }
 
-        // ✅ Stop moving if an enemy or base is in attack range
         float attackDistance = currentTarget == targetBase ? baseAttackRange : attackRange;
+
         if (currentTarget != null && Vector2.Distance(transform.position, currentTarget.position) <= attackDistance)
         {
             isMoving = false;
@@ -49,16 +63,10 @@ public class UnitController : MonoBehaviour
                 StartCoroutine(Attack());
             }
         }
-        // ✅ MOVE UNTIL UNIT IS RIGHT BEHIND ITS ALLY
         else if (frontAlly != null)
         {
-            float stoppingPosition = isPlayerUnit 
-                ? frontAlly.position.x - queueDistance
-                : frontAlly.position.x + queueDistance;
-
             float currentDistanceToAlly = Mathf.Abs(transform.position.x - frontAlly.position.x);
-
-            if (currentDistanceToAlly > queueDistance * 0.8f) // ✅ Keep moving until very close
+            if (currentDistanceToAlly > queueDistance * 0.8f)
             {
                 isMoving = true;
                 isWaitingInQueue = false;
@@ -75,6 +83,11 @@ public class UnitController : MonoBehaviour
             isWaitingInQueue = false;
         }
 
+        if (animator != null)
+        {
+            animator.SetBool("isWalking", isMoving);
+        }
+
         if (isMoving)
         {
             Move();
@@ -85,15 +98,13 @@ public class UnitController : MonoBehaviour
     {
         Collider2D[] alliesInRange = Physics2D.OverlapCircleAll(transform.position, maxQueueCheckDistance, allyLayer);
         frontAlly = null;
-
         float closestDistance = Mathf.Infinity;
+
         foreach (Collider2D ally in alliesInRange)
         {
             float distanceToAlly = Vector2.Distance(transform.position, ally.transform.position);
-            
-            if (distanceToAlly < closestDistance && distanceToAlly <= maxQueueCheckDistance &&
-                ally.transform != transform && 
-                ((isPlayerUnit && ally.transform.position.x > transform.position.x) || 
+            if (distanceToAlly < closestDistance && ally.transform != transform &&
+                ((isPlayerUnit && ally.transform.position.x > transform.position.x) ||
                 (!isPlayerUnit && ally.transform.position.x < transform.position.x)))
             {
                 frontAlly = ally.transform;
@@ -106,6 +117,7 @@ public class UnitController : MonoBehaviour
     {
         Transform closest = null;
         float minDistance = Mathf.Infinity;
+
         foreach (Collider2D enemy in enemies)
         {
             float distance = Vector2.Distance(transform.position, enemy.transform.position);
@@ -115,6 +127,7 @@ public class UnitController : MonoBehaviour
                 closest = enemy.transform;
             }
         }
+
         return closest;
     }
 
@@ -157,6 +170,12 @@ public class UnitController : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+        }
+
         yield return new WaitForSeconds(attackStartDelay);
 
         if (currentTarget != null)
@@ -172,22 +191,17 @@ public class UnitController : MonoBehaviour
                         baseHealth.TakeDamage(attackDamage);
                         Debug.Log($"{gameObject.name} dealt {attackDamage} damage to the enemy base!");
                     }
-                    else
-                    {
-                        Debug.LogError($"Base {currentTarget.name} does not have a UnitHealth component!");
-                    }
                 }
                 else
                 {
                     UnitHealth targetHealth = currentTarget.GetComponent<UnitHealth>();
                     if (targetHealth != null)
                     {
-                        Debug.Log($"{gameObject.name} attacks {currentTarget.name} for {attackDamage} damage!");
                         targetHealth.TakeDamage(attackDamage);
+                        Debug.Log($"{gameObject.name} attacks {currentTarget.name} for {attackDamage} damage!");
 
                         if (targetHealth.CurrentHealth <= 0)
                         {
-                            Debug.Log($"{currentTarget.name} has died!");
                             currentTarget = null;
                             isMoving = true;
                         }

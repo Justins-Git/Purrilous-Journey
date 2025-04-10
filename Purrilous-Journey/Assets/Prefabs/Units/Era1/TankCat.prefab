@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 5030182073579273093}
   - component: {fileID: 2000646911891961471}
   - component: {fileID: 6698118662567293130}
+  - component: {fileID: -8025488042060327023}
   m_Layer: 0
   m_Name: TankCat
   m_TagString: EnemyUnit
@@ -290,6 +291,30 @@ MonoBehaviour:
     m_Bits: 0
   targetBase: {fileID: 0}
   isPlayerUnit: 0
+  playerAnimator: {fileID: 9100000, guid: 470bb899023a27044960e88fc9130172, type: 2}
+  enemyAnimator: {fileID: 9100000, guid: a27fdeef8023fbe4eabf4e2299c69936, type: 2}
+--- !u!95 &-8025488042060327023
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407256142306575783}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 470bb899023a27044960e88fc9130172, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &547133241980025958
 PrefabInstance:
   m_ObjectHideFlags: 0
