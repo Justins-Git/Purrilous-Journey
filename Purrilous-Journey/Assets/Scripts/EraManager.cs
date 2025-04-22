@@ -4,10 +4,13 @@ using TMPro;
 
 public class EraManager : MonoBehaviour
 {
+    [SerializeField] private SpriteRenderer backgroundRenderer;
+    [SerializeField] private Sprite[] backgroundSprites; // One per era
     public static EraManager Instance;
     public Button evolveButton;
     public int currentEra = 0;
     public int currentXP = 0;
+    
 
     public int[] xpThresholds = { 250, 500, 1500, 5000 }; // Cost to evolve
     public TMP_Text eraText;
@@ -77,6 +80,11 @@ public class EraManager : MonoBehaviour
                 : "-";
 
             xpDisplayText.text = $"XP: {currentXP} / {xpNeeded}";
+        }
+
+        if (backgroundRenderer != null && currentEra < backgroundSprites.Length)
+        {
+            backgroundRenderer.sprite = backgroundSprites[currentEra];
         }
     }
 }

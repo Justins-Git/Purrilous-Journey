@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6244529673226116942}
   m_Layer: 6
   m_Name: Base04
-  m_TagString: Base
+  m_TagString: PlayerBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.18752226, g: 0.32398385, b: 0.8113208, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 11e0f2cdbaf68874287a75b2b5b8d505, type: 3}
+  m_Color: {r: 0.802, g: 0.802, b: 0.802, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -130,7 +130,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.5466666, y: 1.1266667}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -246,7 +246,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2, y: 1}
   m_EdgeRadius: 0
 --- !u!1001 &4352308468775328413
 PrefabInstance:
@@ -352,6 +352,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1661013797512509728, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1904641382542919467, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -413,7 +417,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4714215987246448693, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
+    - {fileID: 6816546185046169967, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}

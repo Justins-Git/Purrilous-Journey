@@ -106,6 +106,19 @@ public class PlayerUnitSpawner : MonoBehaviour
 
     public void SetEnemyBase(Transform newBase)
     {
+        if (newBase == null)
+        {
+            Debug.LogWarning("❗ [SetEnemyBase] Tried to assign null base.");
+            return;
+        }
+
+        if (newBase.CompareTag("PlayerBase"))
+        {
+            Debug.LogWarning("❌ [SetEnemyBase] Attempted to assign the PLAYER base as the enemy base!");
+            return;
+        }
+
         enemyBaseRef = newBase;
+        Debug.Log($"✅ [SetEnemyBase] Updated enemyBaseRef to: {newBase.name}");
     }
 }

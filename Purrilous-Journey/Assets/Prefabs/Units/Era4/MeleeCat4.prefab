@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 5030182073579273093}
   - component: {fileID: 2000646911891961471}
   - component: {fileID: 6698118662567293130}
+  - component: {fileID: 7266185307080529944}
   m_Layer: 0
   m_Name: MeleeCat4
   m_TagString: EnemyUnit
@@ -232,7 +233,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.2, y: 1}
+  m_Size: {x: 1.2, y: 0.6}
   m_EdgeRadius: 0
 --- !u!50 &2000646911891961471
 Rigidbody2D:
@@ -290,6 +291,30 @@ MonoBehaviour:
     m_Bits: 0
   targetBase: {fileID: 0}
   isPlayerUnit: 0
+  playerAnimator: {fileID: 9100000, guid: 740abefb6c44e26408ea70874f6abf9e, type: 2}
+  enemyAnimator: {fileID: 9100000, guid: 38bc482f812ae6b489d41719ba63d920, type: 2}
+--- !u!95 &7266185307080529944
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3407256142306575783}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 740abefb6c44e26408ea70874f6abf9e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &547133241980025958
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,6 +419,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4444670312786654450, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6679856346457816666, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
       propertyPath: m_SizeDelta.x
       value: 80
@@ -409,6 +438,10 @@ PrefabInstance:
     - target: {fileID: 7301439696665416095, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
       propertyPath: m_SizeDelta.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7338415404489939935, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
+      propertyPath: m_text
+      value: IV
       objectReference: {fileID: 0}
     - target: {fileID: 7627640137022408583, guid: 8d0746e4a994ead4e9706ddb4d892578, type: 3}
       propertyPath: m_Enabled

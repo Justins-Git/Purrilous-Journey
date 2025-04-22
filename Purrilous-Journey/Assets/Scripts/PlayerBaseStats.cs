@@ -35,6 +35,10 @@ public class PlayerBaseStats : MonoBehaviour
             GameObject newBase = Instantiate(baseEraPrefabs[era], baseParent.position, Quaternion.identity, baseParent);
             currentBaseInstance = newBase;
 
+            CPUUnitSpawner.Instance?.UpdatePlayerBaseTarget(currentBaseInstance.transform);
+            PlayerUnitSpawner.Instance?.SetEnemyBase(CPUUnitSpawner.Instance?.GetCurrentBaseTransform());
+            
+
             BaseStats stats = currentBaseInstance.GetComponent<BaseStats>();
             if (stats != null)
             {

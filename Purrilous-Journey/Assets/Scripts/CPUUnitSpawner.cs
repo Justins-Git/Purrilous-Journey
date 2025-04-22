@@ -32,12 +32,12 @@ public class CPUUnitSpawner : MonoBehaviour
     private float eraTimer;
     private int difficultyLevel;
     private int currentEra = 0;
+    private GameObject currentBase;
 
     void Awake()
     {
         Instance = this;
     }
-    private GameObject currentBase;
 
     private void Start()
     {
@@ -144,7 +144,7 @@ public class CPUUnitSpawner : MonoBehaviour
 
         currentBase = Instantiate(basePrefabs[newEra], baseSpawnPoint.position, Quaternion.identity);
 
-        PlayerUnitSpawner.Instance?.SetEnemyBase(GetCurrentBaseTransform());
+        PlayerUnitSpawner.Instance?.SetEnemyBase(currentBase.transform);
         Debug.Log($"🚀 CPU evolved to Era {newEra + 1}");
     }
 
@@ -157,5 +157,15 @@ public class CPUUnitSpawner : MonoBehaviour
     {
         playerBaseRef = newBase;
         Debug.Log($"CPU now targeting new player base: {newBase.name}");
+
+        // 🔁 Update all existing enemy units
+        UnitController[] allUnits = FindObjectsOfType<UnitController>();
+        foreach (UnitController uc in allUnits)
+        {
+            if (!uc.isPlayerUnit) // only affect CPU units
+            {
+                uc.targetBase = newBase;
+            }
+        }
     }
 }

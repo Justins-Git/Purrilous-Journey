@@ -183,7 +183,7 @@ public class UnitController : MonoBehaviour
             float attackDistance = currentTarget == targetBase ? baseAttackRange : attackRange;
             if (Vector2.Distance(transform.position, currentTarget.position) <= attackDistance)
             {
-                if (currentTarget.CompareTag("Base") || currentTarget == targetBase)
+                if (currentTarget.CompareTag("EnemyBase") || currentTarget.CompareTag("PlayerBase") || currentTarget == targetBase)
                 {
                     UnitHealth baseHealth = currentTarget.GetComponent<UnitHealth>();
                     if (baseHealth != null)
